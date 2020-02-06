@@ -3,7 +3,8 @@ import time
 import logging
 
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
-
+#from definiciones import dormir
+#from definiciones import UnThread
 def dormir():
     logging.info('Empenzado')
     time.sleep(1)
