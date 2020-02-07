@@ -11,7 +11,7 @@ def dormir():
     time.sleep(1)
 #forma hecha clasica por nosotros
 
-tiempo=0
+'''tiempo=0
 for i in range(10):
     t=Contador()
     t.iniciar()
@@ -21,15 +21,19 @@ for i in range(10):
     t.finalizar()
     t.imprimir()
     tiempo+=t.numero()
-print('pasaron en total',tiempo,'segundos')
+print('pasaron en total',tiempo,'segundos')'''
 
 #forma del profesor, mucho mas simple
 
 y=Contador()
 y.iniciar()
+lista=[]#lista vacia
 for i in range(10):
     i=threading.Thread(target=dormir , name= "tread desde funcion")
     i.start()
-    i.join()
+    lista.append(i)
+    #i.join()
+for thread in lista:
+    thread.join()
 y.finalizar()
 y.imprimir()
