@@ -6,8 +6,6 @@ import threading
 from tiempo import Contador
 
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
-
-
 img_urls = [
     'https://images.unsplash.com/photo-1516117172878-fd2c41f4a759',
     'https://images.unsplash.com/photo-1532009324734-20a7a5813719',
@@ -25,7 +23,7 @@ img_urls = [
     'https://images.unsplash.com/photo-1550439062-609e1531270e',
     'https://images.unsplash.com/photo-1549692520-acc6669e2f0c'
 ]
-
+lock = threading.Lock()
 def bajar_imagen(img_url):
     img_bytes = requests.get(img_url).content
     img_name = img_url.split('/')[3]
@@ -38,11 +36,12 @@ def bajar_imagen(img_url):
 tiempo = Contador()
 
 tiempo.iniciar()
-
+lista=[]
 # una por una
 for url in img_urls:
-    bajar_imagen(url)
-
+    t= threading.Thread(target=bajar_imagen(url))
+    t.start()
+    lista.append(t)
 tiempo.finalizar()
 tiempo.imprimir()
 
